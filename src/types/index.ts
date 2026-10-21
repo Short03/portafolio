@@ -1,20 +1,28 @@
+export type Idioma = 'es' | 'en'
+
+/** Un texto escrito en cada idioma. TypeScript exige los dos. */
+export type Traducible = Record<Idioma, string>
+
+/** Para nombres que pueden ser iguales en ambos idiomas: un string se usa tal cual. */
+export type Texto = string | Traducible
+
 /** Un enlace con su texto visible. */
 export interface Enlace {
-  etiqueta: string
+  etiqueta: Texto
   url: string
 }
 
 /** Una fila del recuadro "Disponible para trabajar". */
 export interface DatoRapido {
-  etiqueta: string
-  valor: string
+  etiqueta: Traducible
+  valor: Texto
 }
 
 /** Una sección de la página: da el id del ancla, el número y el título. */
 export interface InfoSeccion {
   id: string
   numero: string
-  titulo: string
+  titulo: Texto
 }
 
 export interface Perfil {
@@ -22,10 +30,15 @@ export interface Perfil {
   /** Se muestran en gris, después del nombre. */
   apellidos: string
   dominio: string
-  rol: string
-  presentacion: string
+  rol: Traducible
+  presentacion: Traducible
+  /** Título y descripción de la pestaña y de Google, por idioma. */
+  meta: {
+    titulo: Traducible
+    descripcion: Traducible
+  }
   cv: {
-    etiqueta: string
+    etiqueta: Traducible
     etiquetaCorta: string
     ruta: string
   }
@@ -33,8 +46,8 @@ export interface Perfil {
   github: Enlace
   linkedin: Enlace
   disponible: {
-    sello: string
-    titulo: string
+    sello: Traducible
+    titulo: Traducible
     datos: DatoRapido[]
   }
   contacto: {
@@ -47,36 +60,37 @@ export interface Perfil {
 }
 
 export interface Tecnologia {
-  nombre: string
+  nombre: Texto
   /** Las principales se resaltan con el color de acento. */
   destacada?: boolean
 }
 
 export interface GrupoStack {
-  titulo: string
+  titulo: Traducible
   tecnologias: Tecnologia[]
 }
 
 export interface Trabajo {
-  puesto: string
-  organizacion: string
+  puesto: Traducible
+  organizacion: Texto
   /** Opcional: si falta, no se muestra fecha. */
-  fecha?: string
-  logros: string[]
+  fecha?: Traducible
+  logros: Traducible[]
 }
 
+/** El estado es una clave fija; su texto en cada idioma vive en src/i18n/ui.ts. */
 export type EstadoProyecto = 'Código abierto' | 'En desarrollo' | 'En línea'
 
 export interface Proyecto {
-  nombre: string
+  nombre: Texto
   estado: EstadoProyecto
-  descripcion: string
+  descripcion: Traducible
   tecnologias: string[]
   /** Opcional: si falta, el título no es enlace. */
   enlace?: string
 }
 
 export interface Estudio {
-  titulo: string
-  detalle: string
+  titulo: Traducible
+  detalle: Traducible
 }
