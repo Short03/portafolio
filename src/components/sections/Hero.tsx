@@ -1,6 +1,7 @@
 import { Download } from 'lucide-react'
 import { motion, useReducedMotion } from 'motion/react'
 import { perfil } from '../../data/perfil'
+import { useIdioma } from '../../i18n/contexto'
 import { Boton } from '../ui/Boton'
 import { IconoGitHub, IconoLinkedIn } from '../ui/IconosMarca'
 
@@ -14,6 +15,7 @@ const subir = (retraso: number) => ({
 export function Hero() {
   const reducir = useReducedMotion()
   const animar = (retraso: number) => (reducir ? {} : subir(retraso))
+  const { t } = useIdioma()
   const { disponible } = perfil
 
   return (
@@ -24,7 +26,7 @@ export function Hero() {
     >
       <div className="min-w-0">
         <p className="mt-0 mb-3.5 font-mono text-[13px] tracking-[0.06em] text-acento uppercase">
-          {perfil.rol}
+          {t(perfil.rol)}
         </p>
         <motion.h1
           id="inicio-titulo"
@@ -34,7 +36,7 @@ export function Hero() {
           {perfil.nombre} <span className="font-normal text-tenue">{perfil.apellidos}</span>
         </motion.h1>
         <motion.p {...animar(0.08)} className="mt-6 mb-0 max-w-[58ch] text-[clamp(17px,2vw,20px)]">
-          {perfil.presentacion}
+          {t(perfil.presentacion)}
         </motion.p>
         <motion.div {...animar(0.16)} className="mt-7 flex flex-wrap gap-3">
           <Boton
@@ -42,38 +44,40 @@ export function Hero() {
             download
             icono={<Download aria-hidden="true" className="size-4" />}
           >
-            {perfil.cv.etiqueta}
+            {t(perfil.cv.etiqueta)}
           </Boton>
           <Boton href={perfil.verProyectos.url} variante="fantasma">
-            {perfil.verProyectos.etiqueta}
+            {t(perfil.verProyectos.etiqueta)}
           </Boton>
           <Boton href={perfil.github.url} externo variante="fantasma" icono={<IconoGitHub />}>
-            {perfil.github.etiqueta}
+            {t(perfil.github.etiqueta)}
           </Boton>
           <Boton href={perfil.linkedin.url} externo variante="fantasma" icono={<IconoLinkedIn />}>
-            {perfil.linkedin.etiqueta}
+            {t(perfil.linkedin.etiqueta)}
           </Boton>
         </motion.div>
       </div>
 
       <aside
-        aria-label={disponible.titulo}
+        aria-label={t(disponible.titulo)}
         className="relative w-full max-w-80 border-[1.5px] border-dashed border-linea bg-superficie p-[18px] font-mono text-xs text-tenue md:w-[230px] md:rotate-[1.5deg]"
       >
         <p className="absolute -top-[22px] right-2 m-0 grid size-[84px] -rotate-[14deg] place-items-center rounded-full border-2 border-sello bg-superficie text-center text-[10px] leading-tight font-medium tracking-[0.06em] text-sello uppercase md:-right-[18px]">
           <span>
-            {disponible.sello.split(' ').map((palabra) => (
-              <span key={palabra} className="block">
-                {palabra}
-              </span>
-            ))}
+            {t(disponible.sello)
+              .split(' ')
+              .map((palabra) => (
+                <span key={palabra} className="block">
+                  {palabra}
+                </span>
+              ))}
           </span>
         </p>
         <dl className="m-0 grid gap-2">
           {disponible.datos.map((dato) => (
-            <div key={dato.etiqueta}>
-              <dt className="text-[10px] tracking-[0.08em] uppercase">{dato.etiqueta}</dt>
-              <dd className="m-0 text-[13px] text-tinta">{dato.valor}</dd>
+            <div key={dato.etiqueta.es}>
+              <dt className="text-[10px] tracking-[0.08em] uppercase">{t(dato.etiqueta)}</dt>
+              <dd className="m-0 text-[13px] text-tinta">{t(dato.valor)}</dd>
             </div>
           ))}
         </dl>

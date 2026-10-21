@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from 'motion/react'
 import type { ReactNode } from 'react'
+import { useIdioma } from '../../i18n/contexto'
 import type { InfoSeccion } from '../../types'
 
 interface SeccionProps {
@@ -13,6 +14,7 @@ interface SeccionProps {
  */
 export function Seccion({ info, children }: SeccionProps) {
   const reducir = useReducedMotion()
+  const { t } = useIdioma()
   const idTitulo = `${info.id}-titulo`
 
   return (
@@ -27,7 +29,7 @@ export function Seccion({ info, children }: SeccionProps) {
           id={idTitulo}
           className="mt-1 font-display text-2xl font-semibold tracking-[-0.01em] text-tinta"
         >
-          {info.titulo}
+          {t(info.titulo)}
         </h2>
       </div>
       <motion.div

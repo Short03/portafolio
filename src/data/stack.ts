@@ -2,7 +2,7 @@ import type { GrupoStack } from '../types'
 
 export const stack: GrupoStack[] = [
   {
-    titulo: 'Back end y datos',
+    titulo: { es: 'Back end y datos', en: 'Back end & data' },
     tecnologias: [
       { nombre: 'C# / .NET', destacada: true },
       { nombre: 'SQL Server', destacada: true },
@@ -15,7 +15,7 @@ export const stack: GrupoStack[] = [
     ],
   },
   {
-    titulo: 'Front end',
+    titulo: { es: 'Front end', en: 'Front end' },
     tecnologias: [
       { nombre: 'JavaScript', destacada: true },
       { nombre: 'React', destacada: true },
@@ -26,7 +26,7 @@ export const stack: GrupoStack[] = [
     ],
   },
   {
-    titulo: 'Herramientas',
+    titulo: { es: 'Herramientas', en: 'Tools' },
     tecnologias: [
       { nombre: 'Git / GitHub', destacada: true },
       { nombre: 'GitHub Actions' },
@@ -42,12 +42,12 @@ export const stack: GrupoStack[] = [
     ],
   },
   {
-    titulo: 'Diseño',
+    titulo: { es: 'Diseño', en: 'Design' },
     tecnologias: [
       { nombre: 'Figma' },
-      { nombre: 'Prototipado' },
-      { nombre: 'Diseño responsivo' },
-      { nombre: 'Accesibilidad' },
+      { nombre: { es: 'Prototipado', en: 'Prototyping' } },
+      { nombre: { es: 'Diseño responsivo', en: 'Responsive design' } },
+      { nombre: { es: 'Accesibilidad', en: 'Accessibility' } },
     ],
   },
 ]

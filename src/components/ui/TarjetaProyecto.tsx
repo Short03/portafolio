@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import { useIdioma } from '../../i18n/contexto'
 import type { EstadoProyecto, Proyecto } from '../../types'
 import { Chip, ListaChips } from './Chip'
 
@@ -11,6 +12,7 @@ const estiloEstado: Record<EstadoProyecto, string> = {
 
 export function TarjetaProyecto({ proyecto }: { proyecto: Proyecto }) {
   const { nombre, estado, descripcion, tecnologias, enlace } = proyecto
+  const { t, ui } = useIdioma()
 
   return (
     <article className="flex flex-col gap-2.5 rounded-xl border border-linea bg-superficie p-[22px]">
@@ -20,7 +22,7 @@ export function TarjetaProyecto({ proyecto }: { proyecto: Proyecto }) {
           estiloEstado[estado],
         )}
       >
-        {estado}
+        {ui.estados[estado]}
       </span>
       <h3 className="font-display text-[21px] font-semibold tracking-[-0.01em]">
         {enlace ? (
@@ -30,17 +32,17 @@ export function TarjetaProyecto({ proyecto }: { proyecto: Proyecto }) {
             rel="noopener noreferrer"
             className="inline-flex min-h-11 items-center text-tinta no-underline hover:text-acento"
           >
-            {nombre}
+            {t(nombre)}
           </a>
         ) : (
-          nombre
+          t(nombre)
         )}
       </h3>
-      <p className="m-0 text-[15px] text-tenue">{descripcion}</p>
+      <p className="m-0 text-[15px] text-tenue">{t(descripcion)}</p>
       <ListaChips className="mt-auto pt-1.5">
-        {tecnologias.map((t) => (
-          <Chip key={t} tamano="chico">
-            {t}
+        {tecnologias.map((tecnologia) => (
+          <Chip key={tecnologia} tamano="chico">
+            {tecnologia}
           </Chip>
         ))}
       </ListaChips>

@@ -1,15 +1,10 @@
 import { Mail, Phone } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { perfil, secciones } from '../../data/perfil'
+import { useIdioma } from '../../i18n/contexto'
 import { Seccion } from '../ui/Seccion'
 
 type EstadoCopia = 'inicial' | 'copiado' | 'manual'
-
-const textoBoton: Record<EstadoCopia, string> = {
-  inicial: 'Copiar',
-  copiado: 'Copiado',
-  manual: 'Selecciona y copia',
-}
 
 interface BotonCopiarProps {
   texto: string
@@ -20,6 +15,12 @@ interface BotonCopiarProps {
 
 function BotonCopiar({ texto, idObjetivo, aviso }: BotonCopiarProps) {
   const [estado, setEstado] = useState<EstadoCopia>('inicial')
+  const { ui } = useIdioma()
+  const textoBoton: Record<EstadoCopia, string> = {
+    inicial: ui.copiar,
+    copiado: ui.copiado,
+    manual: ui.seleccionaYCopia,
+  }
 
   // Después de copiar, regresa a "Copiar".
   useEffect(() => {
@@ -68,6 +69,7 @@ const claseDato =
 
 export function Contacto() {
   const { correo, telefono, telefonoEnlace } = perfil.contacto
+  const { ui } = useIdioma()
 
   return (
     <Seccion info={secciones.contacto}>
@@ -77,14 +79,14 @@ export function Contacto() {
             <Mail aria-hidden="true" className="size-4 shrink-0" />
             <span id="dato-correo">{correo}</span>
           </a>
-          <BotonCopiar texto={correo} idObjetivo="dato-correo" aviso="Correo copiado" />
+          <BotonCopiar texto={correo} idObjetivo="dato-correo" aviso={ui.correoCopiado} />
         </div>
         <div className="flex flex-wrap items-center gap-3">
           <a href={`tel:${telefonoEnlace}`} className={claseDato}>
             <Phone aria-hidden="true" className="size-4 shrink-0" />
             <span id="dato-telefono">{telefono}</span>
           </a>
-          <BotonCopiar texto={telefono} idObjetivo="dato-telefono" aviso="Teléfono copiado" />
+          <BotonCopiar texto={telefono} idObjetivo="dato-telefono" aviso={ui.telefonoCopiado} />
         </div>
       </div>
     </Seccion>
