@@ -1,0 +1,72 @@
+@import 'tailwindcss';
+
+/* Paleta de la referencia. Modo claro por defecto; el sistema decide el oscuro. */
+:root {
+  --fondo: #f2f5f4;
+  --superficie: #ffffff;
+  --tinta: #13211e;
+  --tenue: #56655f;
+  --linea: #d5ded9;
+  /* #0E7A68 en la referencia; un tono más oscuro para pasar AA sobre acento-suave (4.63:1). */
+  --acento: #0d7666;
+  --acento-suave: #dcefea;
+  --sello: #b5462f;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fondo: #0d1412;
+    --superficie: #141e1b;
+    --tinta: #e3ece8;
+    --tenue: #93a59e;
+    --linea: #26332f;
+    --acento: #52c6af;
+    --acento-suave: #16302a;
+    --sello: #e08468;
+    color-scheme: dark;
+  }
+}
+
+/* `inline` hace que cada clase use la variable directamente, así cambia con el modo oscuro. */
+@theme inline {
+  --color-fondo: var(--fondo);
+  --color-superficie: var(--superficie);
+  --color-tinta: var(--tinta);
+  --color-tenue: var(--tenue);
+  --color-linea: var(--linea);
+  --color-acento: var(--acento);
+  --color-acento-suave: var(--acento-suave);
+  --color-sello: var(--sello);
+}
+
+@theme {
+  --font-display: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+@layer base {
+  html {
+    /* Deja espacio para la navbar fija al saltar a una sección. */
+    scroll-padding-top: 5rem;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    @apply bg-fondo font-sans text-base/relaxed text-tinta antialiased;
+  }
+
+  a {
+    @apply text-acento;
+  }
+
+  :focus-visible {
+    @apply rounded-sm outline-2 outline-offset-3 outline-acento;
+  }
+}
