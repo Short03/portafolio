@@ -1,4 +1,5 @@
-import { render, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
+import { renderizar } from '../../test/renderizar'
 import userEvent from '@testing-library/user-event'
 import { expect, test, vi } from 'vitest'
 import { perfil } from '../../data/perfil'
@@ -8,7 +9,7 @@ test('el botón "Copiar" del correo copia el correo y cambia su texto a "Copiado
   // userEvent.setup() instala un portapapeles falso; lo espiamos para verificar qué se copió.
   const user = userEvent.setup()
   const escribir = vi.spyOn(navigator.clipboard, 'writeText')
-  render(<Contacto />)
+  renderizar(<Contacto />)
 
   // aria-describedby une el botón con el correo, así distinguimos los dos botones "Copiar".
   const boton = screen.getByRole('button', {
