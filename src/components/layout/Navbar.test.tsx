@@ -1,11 +1,12 @@
-import { render, screen, within } from '@testing-library/react'
+import { screen, within } from '@testing-library/react'
+import { renderizar } from '../../test/renderizar'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, test } from 'vitest'
 import { Navbar } from './Navbar'
 
 function abrirMenu() {
   const user = userEvent.setup()
-  render(<Navbar />)
+  renderizar(<Navbar />)
   const boton = screen.getByRole('button', { name: 'Abrir menú' })
   const menu = document.getElementById('menu-movil') as HTMLElement
   return { user, boton, menu }

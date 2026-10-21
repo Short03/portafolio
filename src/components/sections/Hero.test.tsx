@@ -1,9 +1,10 @@
-import { render, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
+import { renderizar } from '../../test/renderizar'
 import { expect, test } from 'vitest'
 import { Hero } from './Hero'
 
 test('el botón "Descargar CV" apunta al PDF y tiene el atributo download', () => {
-  render(<Hero />)
+  renderizar(<Hero />)
 
   const enlace = screen.getByRole('link', { name: 'Descargar CV' })
 
