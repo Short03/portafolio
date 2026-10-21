@@ -57,6 +57,30 @@ Los componentes no tienen texto del CV: todo vive en `src/data/*.ts`.
 - **Experiencia, stack o formación:** edita el archivo correspondiente en `src/data/`.
 - **Datos personales, enlaces y recuadro "Disponible":** `src/data/perfil.ts`.
 
+## Español e inglés
+
+El botón **EN / ES** de la navbar cambia todo el sitio de idioma y recuerda la elección.
+
+- Cada texto del CV se escribe como `{ es: '...', en: '...' }`. Si falta uno de los dos,
+  TypeScript marca error y el build no pasa.
+- Los nombres que no cambian (React, SQL Server, Agencia Digital Web) pueden ser un `string`
+  simple.
+- Los textos de la interfaz ("Copiar", "Abrir menú", estados de proyectos) viven en
+  `src/i18n/ui.ts`.
+- Google indexa la versión en español, que es la que carga primero.
+
+Ejemplo de proyecto nuevo:
+
+```ts
+{
+  nombre: 'mi-proyecto.com',
+  estado: 'En línea',
+  descripcion: { es: 'Descripción en español.', en: 'English description.' },
+  tecnologias: ['React', 'TypeScript'],
+  enlace: 'https://mi-proyecto.com',
+}
+```
+
 ## Cómo actualizar el CV
 
 1. Edita tu CV y expórtalo a PDF.
